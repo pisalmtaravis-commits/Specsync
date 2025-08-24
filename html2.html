@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--  Computer Parts and Price -->
+    <section id="builder" class="builder-section">
+        <div class="container">
+            <h2 class="section-title">Computer Parts and Price</h2>
+            <div class="builder-container">
+                <div class="builder-form">
+                    <div class="form-group">
+                        <label for="budget">Your Budget (₱):</label>
+                        <input type="number" id="budget" placeholder="Enter your budget" min="5000" max="500000" oninput="updateTotal()">
+                    </div>
+
+                    <!-- Core Components -->
+                    <div class="component-selector">
+                        <label for="cpu">Processor (CPU):</label>
+                        <select id="cpu" onchange="updateTotal()">
+                            <option value="">Select CPU</option>
+                            <option value="i9-13900k" data-price="29450">Intel Core i9-13900K (₱29,450)</option>
+                            <option value="ryzen9-7950x" data-price="34950">AMD Ryzen 9 7950X (₱34,950)</option>
+                            <option value="i7-13700k" data-price="20450">Intel Core i7-13700K (₱20,450)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="gpu">Graphics Card (GPU):</label>
+                        <select id="gpu" onchange="updateTotal()">
+                            <option value="">Select GPU</option>
+                            <option value="rtx4090" data-price="79950">NVIDIA RTX 4090 (₱79,950)</option>
+                            <option value="rx7900xtx" data-price="49950">AMD RX 7900 XTX (₱49,950)</option>
+                            <option value="rtx4070" data-price="29950">NVIDIA RTX 4070 (₱29,950)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="ram">Memory (RAM):</label>
+                        <select id="ram" onchange="updateTotal()">
+                            <option value="">Select RAM</option>
+                            <option value="32gb-ddr5" data-price="6450">32GB DDR5 6000MHz (₱6,450)</option>
+                            <option value="16gb-ddr5" data-price="4450">16GB DDR5 6000MHz (₱4,450)</option>
+                            <option value="32gb-ddr4" data-price="3950">32GB DDR4 3600MHz (₱3,950)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="storage">Storage:</label>
+                        <select id="storage" onchange="updateTotal()">
+                            <option value="">Select Storage</option>
+                            <option value="2tb-nvme" data-price="7450">2TB NVMe SSD (₱7,450)</option>
+                            <option value="1tb-nvme" data-price="4450">1TB NVMe SSD (₱4,450)</option>
+                            <option value="2tb-hdd" data-price="2950">2TB HDD 7200RPM (₱2,950)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="motherboard">Motherboard:</label>
+                        <select id="motherboard" onchange="updateTotal()">
+                            <option value="">Select Motherboard</option>
+                            <option value="z790" data-price="14950">Z790 Gaming Motherboard (₱14,950)</option>
+                            <option value="b760" data-price="9450">B760 Motherboard (₱9,450)</option>
+                            <option value="b650" data-price="9950">B650 Motherboard (₱9,950)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="psu">Power Supply (PSU):</label>
+                        <select id="psu" onchange="updateTotal()">
+                            <option value="">Select PSU</option>
+                            <option value="850w-gold" data-price="6500">850W 80+ Gold (₱6,500)</option>
+                            <option value="750w-gold" data-price="5500">750W 80+ Gold (₱5,500)</option>
+                            <option value="650w-bronze" data-price="3500">650W 80+ Bronze (₱3,500)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="case">PC Case:</label>
+                        <select id="case" onchange="updateTotal()">
+                            <option value="">Select Case</option>
+                            <option value="full-tower" data-price="8000">Full Tower Case (₱8,000)</option>
+                            <option value="mid-tower" data-price="5000">Mid Tower Case (₱5,000)</option>
+                            <option value="mini-itx" data-price="4000">Mini-ITX Case (₱4,000)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="cooler">CPU Cooler:</label>
+                        <select id="cooler" onchange="updateTotal()">
+                            <option value="">Select Cooler</option>
+                            <option value="aio-360mm" data-price="7500">360mm AIO Liquid Cooler (₱7,500)</option>
+                            <option value="aio-240mm" data-price="5500">240mm AIO Liquid Cooler (₱5,500)</option>
+                            <option value="air-cooler" data-price="2500">Premium Air Cooler (₱2,500)</option>
+                        </select>
+                    </div>
+
+                    <!-- Peripherals -->
+                    <div class="component-selector">
+                        <label for="keyboard">Keyboard:</label>
+                        <select id="keyboard" onchange="updateTotal()">
+                            <option value="">Select Keyboard</option>
+                            <option value="mechanical" data-price="3500">Mechanical Keyboard (₱3,500)</option>
+                            <option value="gaming" data-price="2500">Gaming Keyboard (₱2,500)</option>
+                            <option value="standard" data-price="800">Standard Keyboard (₱800)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="mouse">Mouse:</label>
+                        <select id="mouse" onchange="updateTotal()">
+                            <option value="">Select Mouse</option>
+                            <option value="gaming" data-price="2000">Gaming Mouse (₱2,000)</option>
+                            <option value="wireless" data-price="1500">Wireless Mouse (₱1,500)</option>
+                            <option value="standard" data-price="500">Standard Mouse (₱500)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="monitor">Monitor:</label>
+                        <select id="monitor" onchange="updateTotal()">
+                            <option value="">Select Monitor</option>
+                            <option value="4k" data-price="25000">4K Gaming Monitor (₱25,000)</option>
+                            <option value="1440p" data-price="15000">1440p Monitor (₱15,000)</option>
+                            <option value="1080p" data-price="8000">1080p Monitor (₱8,000)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="headset">Headset:</label>
+                        <select id="headset" onchange="updateTotal()">
+                            <option value="">Select Headset</option>
+                            <option value="gaming-headset" data-price="3000">Gaming Headset (₱3,000)</option>
+                            <option value="studio-headphones" data-price="4500">Studio Headphones (₱4,500)</option>
+                            <option value="wireless-headset" data-price="6000">Wireless Headset (₱6,000)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="build-summary">
+                    <h3>Your Build Summary</h3>
+                    <div class="summary-content">
+                        <div class="total-price">
+                            <h4>Total Price: <span id="totalPrice">₱0</span></h4>
+                            <div id="budgetStatus" class="budget-status"></div>
+                        </div>
+                        
+                        <div class="selected-Parts">
+                            <h4>Selected Parts:</h4>
+                            <ul id="PartsList">
+                                <li>No Parts selected yet</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-actions">
+                            <button class="secondary-button" onclick="clearBuild()">Clear Build</button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

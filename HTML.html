@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specsync Customized</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: #0a0a1a;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #00d4ff 0%, #0077ff 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #fafafa 100%);
+            -webkit-text-fill-color: black;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Builder Section */
+        .builder-section {
+            padding: 4rem 0;
+            background: #1a1a2e;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #00d4ff;
+        }
+
+        .builder-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .builder-form {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #00d4ff;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .component-selector select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #000000;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .component-selector select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .component-selector {
+            margin-bottom: 1.5rem;
+        }
+
+        .component-selector label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #00d4ff;
+            font-size: 1.1rem;
+        }
+
+        .build-summary {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .total-price {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .total-price h4 {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        #totalPrice {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .selected-components {
+            margin-bottom: 2rem;
+        }
+
+        .selected-components h4 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        #componentList {
+            list-style: none;
+        }
+
+        #componentList li {
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #00d4ff;
+            font-size: 0.95rem;
+        }
+
+        .build-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .secondary-button {
+            background: #666;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: #777;
+            transform: translateY(-2px);
+        }
+
+        /* Components Showcase */
+        .components-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .component-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .component-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .component-card:hover .component-image {
+            transform: scale(1.05);
+        }
+
+        .component-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+
+        .component-card p {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .component-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        /* Build Guides Section */
+        .guides-section {
+            padding: 4rem 0;
+            background: #1a1a2e;
+        }
+
+        .guide-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .guide-card {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .guide-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .guide-content {
+            padding: 1.5rem;
+        }
+
+        .guide-level {
+            display: inline-block;
+            background: #00d4ff;
+            color: #0a0a1a;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 4rem 0;
+            background: #16213e;
+        }
+
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a1a;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00d4ff;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .builder-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .components-grid,
+            .guide-cards,
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .build-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Specsync</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#builder">Build your PC</a></li>
+                    <li><a href="#components">Components</a></li>
+                    <li><a href="#About">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Build Your Customized Dream PC </h1>
+            <button class="cta-button" onclick="scrollToBuilder()">Let's Start</button>
+        </div>
+    </section>
+
+    <!--  Computer Parts and Price -->
+    <section id="builder" class="builder-section">
+        <div class="container">
+            <h2 class="section-title">Computer Parts and Price</h2>
+            <div class="builder-container">
+                <div class="builder-form">
+                    <div class="form-group">
+                        <label for="budget">Your Budget (₱):</label>
+                        <input type="number" id="budget" placeholder="Enter your budget" min="5000" max="500000" oninput="updateTotal()">
+                    </div>
+
+                    <!-- Core Components -->
+                    <div class="component-selector">
+                        <label for="cpu">Processor (CPU):</label>
+                        <select id="cpu" onchange="updateTotal()">
+                            <option value="">Select CPU</option>
+                            <option value="i9-13900k" data-price="29450">Intel Core i9-13900K (₱29,450)</option>
+                            <option value="ryzen9-7950x" data-price="34950">AMD Ryzen 9 7950X (₱34,950)</option>
+                            <option value="i7-13700k" data-price="20450">Intel Core i7-13700K (₱20,450)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="gpu">Graphics Card (GPU):</label>
+                        <select id="gpu" onchange="updateTotal()">
+                            <option value="">Select GPU</option>
+                            <option value="rtx4090" data-price="79950">NVIDIA RTX 4090 (₱79,950)</option>
+                            <option value="rx7900xtx" data-price="49950">AMD RX 7900 XTX (₱49,950)</option>
+                            <option value="rtx4070" data-price="29950">NVIDIA RTX 4070 (₱29,950)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="ram">Memory (RAM):</label>
+                        <select id="ram" onchange="updateTotal()">
+                            <option value="">Select RAM</option>
+                            <option value="32gb-ddr5" data-price="6450">32GB DDR5 6000MHz (₱6,450)</option>
+                            <option value="16gb-ddr5" data-price="4450">16GB DDR5 6000MHz (₱4,450)</option>
+                            <option value="32gb-ddr4" data-price="3950">32GB DDR4 3600MHz (₱3,950)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="storage">Storage:</label>
+                        <select id="storage" onchange="updateTotal()">
+                            <option value="">Select Storage</option>
+                            <option value="2tb-nvme" data-price="7450">2TB NVMe SSD (₱7,450)</option>
+                            <option value="1tb-nvme" data-price="4450">1TB NVMe SSD (₱4,450)</option>
+                            <option value="2tb-hdd" data-price="2950">2TB HDD 7200RPM (₱2,950)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="motherboard">Motherboard:</label>
+                        <select id="motherboard" onchange="updateTotal()">
+                            <option value="">Select Motherboard</option>
+                            <option value="z790" data-price="14950">Z790 Gaming Motherboard (₱14,950)</option>
+                            <option value="b760" data-price="9450">B760 Motherboard (₱9,450)</option>
+                            <option value="b650" data-price="9950">B650 Motherboard (₱9,950)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="psu">Power Supply (PSU):</label>
+                        <select id="psu" onchange="updateTotal()">
+                            <option value="">Select PSU</option>
+                            <option value="850w-gold" data-price="6500">850W 80+ Gold (₱6,500)</option>
+                            <option value="750w-gold" data-price="5500">750W 80+ Gold (₱5,500)</option>
+                            <option value="650w-bronze" data-price="3500">650W 80+ Bronze (₱3,500)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="case">PC Case:</label>
+                        <select id="case" onchange="updateTotal()">
+                            <option value="">Select Case</option>
+                            <option value="full-tower" data-price="8000">Full Tower Case (₱8,000)</option>
+                            <option value="mid-tower" data-price="5000">Mid Tower Case (₱5,000)</option>
+                            <option value="mini-itx" data-price="4000">Mini-ITX Case (₱4,000)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="cooler">CPU Cooler:</label>
+                        <select id="cooler" onchange="updateTotal()">
+                            <option value="">Select Cooler</option>
+                            <option value="aio-360mm" data-price="7500">360mm AIO Liquid Cooler (₱7,500)</option>
+                            <option value="aio-240mm" data-price="5500">240mm AIO Liquid Cooler (₱5,500)</option>
+                            <option value="air-cooler" data-price="2500">Premium Air Cooler (₱2,500)</option>
+                        </select>
+                    </div>
+
+                    <!-- Peripherals -->
+                    <div class="component-selector">
+                        <label for="keyboard">Keyboard:</label>
+                        <select id="keyboard" onchange="updateTotal()">
+                            <option value="">Select Keyboard</option>
+                            <option value="mechanical" data-price="3500">Mechanical Keyboard (₱3,500)</option>
+                            <option value="gaming" data-price="2500">Gaming Keyboard (₱2,500)</option>
+                            <option value="standard" data-price="800">Standard Keyboard (₱800)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="mouse">Mouse:</label>
+                        <select id="mouse" onchange="updateTotal()">
+                            <option value="">Select Mouse</option>
+                            <option value="gaming" data-price="2000">Gaming Mouse (₱2,000)</option>
+                            <option value="wireless" data-price="1500">Wireless Mouse (₱1,500)</option>
+                            <option value="standard" data-price="500">Standard Mouse (₱500)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="monitor">Monitor:</label>
+                        <select id="monitor" onchange="updateTotal()">
+                            <option value="">Select Monitor</option>
+                            <option value="4k" data-price="25000">4K Gaming Monitor (₱25,000)</option>
+                            <option value="1440p" data-price="15000">1440p Monitor (₱15,000)</option>
+                            <option value="1080p" data-price="8000">1080p Monitor (₱8,000)</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="headset">Headset:</label>
+                        <select id="headset" onchange="updateTotal()">
+                            <option value="">Select Headset</option>
+                            <option value="gaming-headset" data-price="3000">Gaming Headset (₱3,000)</option>
+                            <option value="studio-headphones" data-price="4500">Studio Headphones (₱4,500)</option>
+                            <option value="wireless-headset" data-price="6000">Wireless Headset (₱6,000)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="build-summary">
+                    <h3>Your Build Summary</h3>
+                    <div class="summary-content">
+                        <div class="total-price">
+                            <h4>Total Price: <span id="totalPrice">₱0</span></h4>
+                            <div id="budgetStatus" class="budget-status"></div>
+                        </div>
+                        
+                        <div class="selected-Parts">
+                            <h4>Selected Parts:</h4>
+                            <ul id="PartsList">
+                                <li>No Parts selected yet</li>
+                            </ul>
+                        </div>
+
+                        <div class="build-actions">
+                            <button class="secondary-button" onclick="clearBuild()">Clear Build</button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Computer Parts Gallery -->
+    <section id="components" class="components-section">
+        <div class="container">
+            <h2 class="section-title">Computer Parts Gallery</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: #cccccc;">Explore all the essential components needed to build your perfect PC</p>
+            
+            <div class="components-grid">
+                <!-- Core Components -->
+                <div class="component-card">
+                    <img src="https://www.thetechedvocate.org/wp-content/uploads/2023/04/raw-h264-183.jpg" alt="High-performance gaming CPU with RGB lighting" class="component-image">
+                    <h3>Processors (CPU)</h3>
+                    <p>The brain of your computer. Choose from Intel and AMD processors for gaming, content creation, or everyday computing.</p>
+                    <div class="component-price">Starting from ₱15,950</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://www.techpowerup.com/img/14-11-06/19a.jpg" alt="High-end graphics card with multiple cooling fans" class="component-image">
+                    <h3>Graphics Cards (GPU)</h3>
+                    <p>Powerful graphics cards for gaming, video editing, and 3D rendering. NVIDIA and AMD options available.</p>
+                    <div class="component-price">Starting from ₱29,950</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://cdn.mos.cms.futurecdn.net/tNudfSZzcGucqDFMP7nXMS.jpg" alt="DDR5 RAM modules with RGB lighting" class="component-image">
+                    <h3>Memory (RAM)</h3>
+                    <p>High-speed DDR4 and DDR5 memory modules. Choose the right capacity and speed for your build.</p>
+                    <div class="component-price">Starting from ₱3,950</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://wccftech.com/wp-content/uploads/2022/08/01-heatsink-of-pc-overview@2x-1-1480x995.jpg" alt="NVMe SSD storage drive" class="component-image">
+                    <h3>Storage Solutions</h3>
+                    <p>Fast NVMe SSDs and high-capacity HDDs. Perfect for operating systems, games, and large files.</p>
+                    <div class="component-price">Starting from ₱2,950</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://techgage.com/wp-content/uploads/2015/10/ASUS-Maximus-VIII-Extreme-Motherboard.jpg" alt="Modern motherboard with VRM cooling" class="component-image">
+                    <h3>Motherboards</h3>
+                    <p>Feature-rich motherboards supporting the latest CPUs. Choose from gaming, workstation, and budget options.</p>
+                    <div class="component-price">Starting from ₱9,450</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.lEfFuTW9VyMHcNmqqBBTUgHaEK?pid=Api&P=0&h=220" alt="Modular power supply unit with cables" class="component-image">
+                    <h3>Power Supplies (PSU)</h3>
+                    <p>Reliable power supplies with 80 Plus certification. Modular designs for clean cable management.</p>
+                    <div class="component-price">Starting from ₱3,500</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://pcbuildsonabudget.com/wp-content/uploads/2020/10/Antec-Torque-PC-Case.jpg" alt="Tempered glass PC case with RGB fans" class="component-image">
+                    <h3>PC Cases</h3>
+                    <p>Stylish cases with excellent airflow. Tempered glass, RGB lighting, and cable management features.</p>
+                    <div class="component-price">Starting from ₱4,000</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.ya2wDzgmNuOnjeFfg62jZAHaEK?pid=Api&P=0&h=220" alt="AIO liquid CPU cooler with RGB" class="component-image">
+                    <h3>CPU Coolers</h3>
+                    <p>Air coolers and AIO liquid cooling solutions. Keep your processor at optimal temperatures.</p>
+                    <div class="component-price">Starting from ₱2,500</div>
+                </div>
+
+                <!-- Peripherals -->
+                <div class="component-card">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.ZnjPTTp447PmtS4g0uKJgQHaDr?pid=Api&P=0&h=220" alt="Mechanical gaming keyboard with RGB lighting" class="component-image">
+                    <h3>Keyboards</h3>
+                    <p>Mechanical, membrane, and gaming keyboards. Choose your preferred switch type and features.</p>
+                    <div class="component-price">Starting from ₱800</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.5Vc8ZB1ckLUqUJJAdWN1uAHaGg?pid=Api&P=0&h=220" alt="Ergonomic gaming mouse with DPI controls" class="component-image">
+                    <h3>Mouse</h3>
+                    <p>Precision gaming mice, wireless options, and ergonomic designs. Find your perfect pointing device.</p>
+                    <div class="component-price">Starting from ₱500</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.TX5NkFgYGSsJkquth7XVuwHaFj?pid=Api&P=0&h=220" alt="Ultrawide gaming monitor with thin bezels" class="component-image">
+                    <h3>Monitors</h3>
+                    <p>4K, 1440p, and 1080p displays. High refresh rates for gaming and color accuracy for creative work.</p>
+                    <div class="component-price">Starting from ₱8,000</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.wMsvBxn2rZk_1tBSz16qUgHaHl?pid=Api&P=0&h=220" alt="Gaming headset with microphone" class="component-image">
+                    <h3>Headsets</h3>
+                    <p>Gaming headsets, studio headphones, and wireless options. Perfect for gaming and content creation.</p>
+                    <div class="component-price">Starting from ₱3,000</div>
+                </div>
+
+                <!-- Additional Components -->
+                <div class="component-card">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.fj1rK9uA2JJLQPdyfP-4sQHaHa?pid=Api&P=0&h=220" alt="RGB case fans for PC cooling" class="component-image">
+                    <h3>Case Fans</h3>
+                    <p>RGB and high-performance case fans. Improve airflow and add visual appeal to your build.</p>
+                    <div class="component-price">Starting from ₱300</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.RaVtRnlZwWtXRQa_LVBbmAHaHa?pid=Api&P=0&h=220" alt="Thermal paste for CPU cooling" class="component-image">
+                    <h3>LED LIGHTS</h3>
+                    <p>LED stands for light emitting diode. It’s a semiconductor device that emits light when an electric current passes through it.</p>
+                    <div class="component-price">Starting from ₱250</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://down-ph.img.susercontent.com/file/922615b568077a16781f210daf16dfa9" alt="Gaming controller for PC" class="component-image">
+                    <h3>AVR</h3>
+                    <p>Automatic Voltage Regulation (AVR) is a term commonly associated with electrical devices like UPSes, stabilizers, and generators that make use of voltage regulators.</p>
+                    <div class="component-price">Starting from ₱1,500</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.6kdwdNabw3-CqDlIWHJTeAHaHa?pid=Api&P=0&h=220" alt="HD webcam for streaming" class="component-image">
+                    <h3>Webcams</h3>
+                    <p>HD and 4K webcams. Essential for streaming, video conferencing, and content creation.</p>
+                    <div class="component-price">Starting from ₱2,000</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.32w02SMujmqkPETQrexKywHaEK?pid=Api&P=0&h=220" alt="Studio microphone for recording" class="component-image">
+                    <h3>Microphones</h3>
+                    <p>Studio microphones and streaming setups. Perfect for podcasting, streaming, and recording.</p>
+                    <div class="component-price">Starting from ₱2,500</div>
+                </div>
+
+                <div class="component-card">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.qrAi1WyEyHpUv21Ls_ODDAHaEK?pid=Api&P=0&h=220" alt="PC building tools and accessories" class="component-image">
+                    <h3>Accessories</h3>
+                    <p>Cables, tools, and other essentials for building and maintaining your PC.</p>
+                    <div class="component-price">Starting from ₱300</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="guides" class="About">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="guide-cards">
+                <div class="guide-card">
+                    <h3>     Specsync is your ultimate destination for building custom PCs, designed to empower enthusiasts and newcomers alike in creating their dream machines. Our platform offers an interactive PC builder that allows users to select and customize components based on their preferences and budget, ensuring a tailored experience for every user. With a comprehensive gallery of high-quality parts, including processors, graphics cards, memory, and peripherals, Specsync provides detailed information and pricing to help you make informed decisions. Our mission is to foster a vibrant community of PC builders, offering expert guidance, resources, and support to help you navigate the exciting world of custom PC building. Whether you're a seasoned expert or just starting, Specsync is here to help you bring your vision to life.</h3>
+                    <div class="guide-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Specsync</h3>
+                <p>THANKYOU FOR USING SPECSYNC</p>
+                <p>--</p>
+                        <h3>Created By:</h3>
+                        <p>-Mathew Jay Pumikipik</p>
+                        <p>-Abegail Ladim</p>
+                        <p>-Psalm Travis Bonos</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#builder">PC Builder</a></li>
+                    <li><a href="#components">Components</a></li>
+                    <li><a href="#About">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: Specsync@gmail.com</p>
+                <p>Phone: 63+ 923 149 2301</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Specsync. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToBuilder() {
+            document.getElementById('builder').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateTotal() {
+            let total = 0;
+            const components = {};
+            const componentList = document.getElementById('PartsList');
+            componentList.innerHTML = ''; // Clear previous list
+
+            const budgetInput = document.getElementById('budget');
+            const budget = parseFloat(budgetInput.value) || 0;
+            const budgetStatus = document.getElementById('budgetStatus');
+
+            const selectors = [
+                'cpu', 'gpu', 'ram', 'storage', 'motherboard', 'psu', 'case', 'cooler',
+                'keyboard', 'mouse', 'monitor', 'headset'
+            ];
+
+            selectors.forEach(id => {
+                const selectElement = document.getElementById(id);
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                const price = parseFloat(selectedOption.dataset.price) || 0;
+                const name = selectedOption.textContent.split('(')[0].trim();
+
+                if (price > 0) {
+                    total += price;
+                    components[id] = { name: name, price: price };
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${name}: ₱${price.toLocaleString()}`;
+                    componentList.appendChild(listItem);
+                }
+            });
+
+            document.getElementById('totalPrice').textContent = `₱${total.toLocaleString()}`;
+
+            if (budget > 0) {
+                const difference = budget - total;
+                if (difference >= 0) {
+                    budgetStatus.textContent = `Under budget by ₱${difference.toLocaleString()}`;
+                    budgetStatus.style.color = '#00ff00';
+                } else {
+                    budgetStatus.textContent = `Over budget by ₱${Math.abs(difference).toLocaleString()}`;
+                    budgetStatus.style.color = '#ff4444';
+                }
+            } else {
+                budgetStatus.textContent = '';
+            }
+
+            if (Object.keys(components).length === 0) {
+                const listItem = document.createElement('li');
+                listItem.textContent = 'No Parts selected yet';
+                componentList.appendChild(listItem);
+            }
+        }
+
+        function clearBuild() {
+            document.getElementById('budget').value = '';
+            const selectors = [
+                'cpu', 'gpu', 'ram', 'storage', 'motherboard', 'psu', 'case', 'cooler',
+                'keyboard', 'mouse', 'monitor', 'headset'
+            ];
+            selectors.forEach(id => {
+                document.getElementById(id).selectedIndex = 0;
+            });
+            document.getElementById('notes').value = '';
+            updateTotal(); // Recalculate total and clear list
+            document.getElementById('budgetStatus').textContent = '';
+        }
+
+        function exportBuild() {
+            let buildSummary = "Your Custom PC Build:\n\n";
+            const componentListItems = document.querySelectorAll('#PartsList li');
+            componentListItems.forEach(item => {
+                if (item.textContent !== 'No Parts selected yet') {
+                    buildSummary += `- ${item.textContent}\n`;
+                }
+            });
+
+            const totalPrice = document.getElementById('totalPrice').textContent;
+            buildSummary += `\nTotal Price: ${totalPrice}\n`;
+
+            const budgetStatus = document.getElementById('budgetStatus').textContent;
+            if (budgetStatus) {
+                buildSummary += `Budget Status: ${budgetStatus}\n`;
+            }
+
+            const notes = document.getElementById('notes').value;
+            if (notes) {
+                buildSummary += `\nBuild Notes:\n${notes}\n`;
+            }
+
+            // Create a Blob with the text content
+            const blob = new Blob([buildSummary], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+
+            // Create a temporary anchor element and trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'my_pc_build.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url); // Clean up the URL object
+        }
+
+        // Initial call to update total on page load
+        document.addEventListener('DOMContentLoaded', updateTotal);
+    </script>
+</body>
+</html>
